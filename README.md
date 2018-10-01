@@ -1,5 +1,7 @@
 # W12 Uprates
 
+This script for scheduling price updating for [Rates.sol](https://github.com/w12-platform/W12-Product-Blockchain-Protocol/blob/master/contracts/rates/Rates.sol) contract.
+
 # Development
 
 ```bash
@@ -9,14 +11,14 @@ $ npm install
 
 # Configuration
 
-Copy and rename `expample.config.js` to `config.js`, it\`s main config. In Additional you may copy and rename `.env.example` to `.env` to load env var from file.
+Copy and rename `example.config.js` to `config.js`, it\`s main config. In Additional you may copy and rename `.env.example` to `.env` to load env var from file.
 
 ```bash
 
 # list of enabled markets to do price request separated with ','
 # availables: coinmarketcap
 ENABLED_MARKETS=coinmarketcap
-# defalt timeout before do request
+# defalt timeout before to do request
 DEFAULT_REQUEST_TIMEOUT=100
 # default response timeout from market api
 DEFAULT_RESPONSE_TIMEOUT=5000
