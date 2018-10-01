@@ -1,0 +1,37 @@
+{
+  "name": "w12-uprates",
+  "version": "0.0.1",
+  "description": "w12-uprates description",
+  "main": "build/entrypoint.js",
+  "scripts": {
+    "build": "rm -rf build && tsc",
+    "start": "npm run build && npm run server",
+    "server": "node ./build/server.js",
+    "dev": "NODE_ENV=development node --inspect=9229 -r ts-node/register ./src/entrypoint.ts",
+    "test": "npm run build && BABEL_ENV=test mocha 'test/**/*.spec.js' --require=@babel/register --colors"
+  },
+  "author": "Kirill Khoroshilov <mr.hokid@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/register": "^7.0.0",
+    "@types/bignumber.js": "^5.0.0",
+    "@types/chai": "^4.1.6",
+    "@types/dotenv": "^4.0.3",
+    "@types/express": "^4.16.0",
+    "@types/mocha": "^5.2.5",
+    "@types/web3": "^1.0.4",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bignumber.js": "^7.2.1",
+    "dotenv": "^6.0.0",
+    "web3": "^1.0.0-beta.36",
+    "winston": "^3.1.0"
+  }
+}
