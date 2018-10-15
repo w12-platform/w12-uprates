@@ -23,10 +23,7 @@ RUN cp config.example.js config.js && \
     npm ci && \
     npm run build
 
-RUN echo "$CRON_SHEDULE /usr/local/bin/node /app/bin/uprates.js >> /var/log/cron.log 2>&1" | crontab && \
-    chmod 600 /etc/crontab && \
-    crontab -l
-
-CMD chmod +x ./start.sh && ./start.sh
+RUN chmod 600 /etc/crontab && chmod +x ./start.sh
+CMD ./start.sh
 
 
