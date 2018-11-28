@@ -1,5 +1,7 @@
+import BigNumber from 'bignumber.js';
 import {expect} from 'chai';
 import Web3 from 'web3';
+import { fromBytes32toUtf8 } from '../../build/utils/index';
 import logger from '../mocks/logger';
 import {Rates} from "../../build/services/Rates/Rates";
 import contractJson from '../../build/services/Rates/contract';
@@ -17,6 +19,7 @@ const web3 = {
     setPriceEstimateGasHook: () => {},
     setPriceSendHook: () => {},
     setPriceHook: () => {},
+    prices: {},
     eth: {
         accounts: {
             wallet: {
@@ -43,6 +46,13 @@ const web3 = {
                         send(args) {
                             web3.setPriceSendHook(args);
                             return Promise.resolve(true);
+                        }
+                    }
+                },
+                get(symbol) {
+                    return {
+                        call(args) {
+                            return Promise.resolve(web3.prices[fromBytes32toUtf8(symbol)] || '0');
                         }
                     }
                 }
@@ -92,6 +102,7 @@ describe('[service] Rates', async () => {
             web3.setPriceSendHook = (args) => { ctx.setPriceSendCallArgs = args; };
 
             ctx.setPriceResult = ctx.Rates.setPrice(Web3.utils.toUtf8(symbol1), 10);
+            web3.prices[symbol1] = '0';
         });
 
         it('should call contract method', async () => {
@@ -101,7 +112,7 @@ describe('[service] Rates', async () => {
 
             expect(actual).to.be.a('object');
             expect(actual.symbol).to.be.eq(symbol1);
-            expect(actual.price).to.be.eq(10);
+            expect(actual.price).to.be.eq('1000000000');
         });
 
         it('should call estimate gas', async () => {

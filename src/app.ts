@@ -3,6 +3,7 @@ import Logger from './services/Logger';
 import {Config} from "../types/config";
 import {Services} from "../types/services";
 import {Rates} from "./services/Rates/Rates";
+import {RatesGuard} from "./services/RatesGuard/RatesGuard";
 import {Markets} from "./services/Markets/Markets";
 import {RatesUpdateController} from "./controllers/RatesUpdateController";
 
@@ -24,11 +25,13 @@ export class App {
         web3.eth.accounts.wallet.add(this.appConfig.ethAccountPrivateKey);
 
         const rates = new Rates(this.appConfig, web3, Logger);
+        const ratesGuard = new RatesGuard(this.appConfig, web3, Logger);
         const markets = new Markets(this.appConfig.markets, Logger);
 
         this.services = {
             web3,
             Rates: rates,
+            RatesGuard: ratesGuard,
             Markets: markets,
             Logger
         };
@@ -38,6 +41,7 @@ export class App {
         this.ratesUpdateController = new RatesUpdateController(
             this.services.Markets,
             this.services.Rates,
+            this.services.RatesGuard,
             this.services.Logger
         );
     }

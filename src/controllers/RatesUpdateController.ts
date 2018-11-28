@@ -1,15 +1,18 @@
 import {IMarkets} from "../../types/Services/Markets";
-import {BulkSetPriceRequest, IRates} from "../../types/Services/Rates";
+import {IRates} from "../../types/Services/Rates";
+import {BulkSetPriceRequest, IRatesGuard} from "../../types/Services/RatesGuard";
 import {Logger} from "winston";
 
 export class RatesUpdateController {
     private readonly markets: IMarkets;
     private readonly rates: IRates;
+    private readonly ratesGuard: IRatesGuard;
     private readonly logger: Logger;
 
-    constructor(markets: IMarkets, rates: IRates, logger: Logger) {
+    constructor(markets: IMarkets, rates: IRates, ratesGuard: IRatesGuard, logger: Logger) {
         this.markets = markets;
         this.rates = rates;
+        this.ratesGuard = ratesGuard;
         this.logger = logger;
     }
 
@@ -33,7 +36,7 @@ export class RatesUpdateController {
 
             this.logger.info('[RatesUpdateController] set new price %o', rates);
 
-            await this.rates.bulkSetPrice(rates as BulkSetPriceRequest);
+            await this.ratesGuard.bulkSetPrice(rates as BulkSetPriceRequest);
 
             this.logger.info('[RatesUpdateController] success');
         } catch (e) {

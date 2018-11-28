@@ -18,5 +18,6 @@ module.exports = {
     ],
     ethAccountPrivateKey: process.env.ETH_ACCOUNT_PRIVATE_KEY,
     ethProvider: process.env.ETH_PROVIDER,
-    ethRatesAddress: process.env.ETH_RATES_ADDRESS
+    ethRatesAddress: process.env.ETH_RATES_ADDRESS,
+    ethRatesGuardAddress: process.env.ETH_RATES_GUARD_ADDRESS
 };

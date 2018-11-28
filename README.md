@@ -36,6 +36,8 @@ ETH_ACCOUNT_PRIVATE_KEY=
 ETH_PROVIDER=https://ropsten.infura.io/v3/{key}
 # address of the rates contract
 ETH_RATES_ADDRESS=__ADDRESS__
+# address of the rates guard contract
+ETH_RATES_GUARD_ADDRESS=__ADDRESS__
 
 # additional (only for docker)
 
