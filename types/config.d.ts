@@ -12,6 +12,7 @@ export interface Config {
     ethAccountPrivateKey: string;
     ethProvider: string;
     ethRatesAddress: string;
+    ethRatesGuardAddress: string;
 }
 
 declare module 'config.js' {
