@@ -15,7 +15,7 @@ ENV CRON_SHEDULE='0 */5 * * *'
 
 RUN apt-get update && apt-get -y install cron && \
     npm install npm@latest -g && npm -v && node -v
-k
+
 WORKDIR /app
 
 COPY . .
