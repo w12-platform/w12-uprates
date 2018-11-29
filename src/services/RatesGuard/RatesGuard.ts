@@ -39,11 +39,11 @@ export class RatesGuard implements IRatesGuard {
             return false;
         }
 
-        const rates = symbols.map(symbol => request[symbol].toString());
-
-        for(const symbol of symbols) {
+        for (const symbol of symbols) {
             request[symbol] = this.normalizePrice(request[symbol]);
         }
+
+        const rates = symbols.map(symbol => request[symbol].toString());
 
         const gas = await this.contract.methods
             .suggest(symbols.map(fromUtf8toBytes32), rates)
